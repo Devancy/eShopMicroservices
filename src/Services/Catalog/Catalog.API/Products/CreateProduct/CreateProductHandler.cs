@@ -6,15 +6,15 @@ public record CreateProductResult(Guid Id);
 internal class CreateProductCommandHandler(IDocumentSession session)
     : ICommandHandler<CreateProductCommand, CreateProductResult>
 {
-    public async Task<CreateProductResult> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+    public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
     {
         var product = new Product
         {
             //Id = Guid.NewGuid(), // TODO: remove this line later
-            Name = request.Name,
-            Categories = request.Categories,
-            Description = request.Description,
-            Price = request.Price
+            Name = command.Name,
+            Categories = command.Categories,
+            Description = command.Description,
+            Price = command.Price
         };
 
         session.Store(product);
