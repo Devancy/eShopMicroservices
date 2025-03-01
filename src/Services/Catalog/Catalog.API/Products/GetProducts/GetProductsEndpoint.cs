@@ -1,8 +1,17 @@
-﻿
-namespace Catalog.API.Products.GetProducts;
+﻿namespace Catalog.API.Products.GetProducts;
 
 public record GetProductsRequest(int? PageNumber = 1, int? PageSize = 10);
-public record GetProductsResponse(IEnumerable<Product> Products);
+public record GetProductsResponse(
+    IEnumerable<Product> Products,
+    long Count,
+    long PageNumber,
+    long PageSize,
+    long PageCount,
+    long TotalItemCount,
+    bool HasPreviousPage,
+    bool HasNextPage,
+    bool IsFirstPage,
+    bool IsLastPage);
 
 public class GetProductsEndpoint : ICarterModule
 {
