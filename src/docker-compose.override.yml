@@ -12,6 +12,7 @@ services:
       - postgres_catalog:/var/lib/postgresql/data/
         
   catalog.api:
+    container_name: catalog.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
