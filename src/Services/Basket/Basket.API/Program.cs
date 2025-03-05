@@ -46,6 +46,7 @@ builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(
 	return handler;
 });
 
+// Cross-cutting services
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 builder.Services.AddHealthChecks()
 	.AddNpgSql(builder.Configuration.GetConnectionString("Database")!)
