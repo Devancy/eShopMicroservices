@@ -11,4 +11,9 @@
       <ProjectReference Include="..\Ordering.Domain\Ordering.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Mapster" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" />
+    </ItemGroup>
+
 </Project>
