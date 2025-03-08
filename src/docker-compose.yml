@@ -9,7 +9,13 @@ services:
     image: redis
     
   orderdb:
-    image: mcr.microsoft.com/mssql/server
+    image: mcr.microsoft.com/mssql/server:2022-latest
+#    user: root
+# enable the line above if the container has write access issue to the mounted volume '/var/opt/mssql/data'
+# Fix the permission by these commands, then restart docker-compose
+# docker exec -it orderdb bash
+# chown -R 10001:10001 /var/opt/mssql/data
+# exit
 
   catalog.api:
     image: catalog.api
@@ -28,10 +34,14 @@ services:
     build:
       context: .
       dockerfile: Services/Discount/Discount.Grpc/Dockerfile
+      
+  ordering.api:
+    image: ordering.api
+    build:
+      context: .
+      dockerfile: Services/Ordering/Ordering.API/Dockerfile
 
 volumes:
   postgres_catalog:
   postgres_basket:
-
-
-
+  mssql_order:
