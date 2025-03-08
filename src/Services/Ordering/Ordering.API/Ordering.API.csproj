@@ -22,10 +22,13 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="AspNetCore.HealthChecks.SqlServer" />
+      <PackageReference Include="AspNetCore.HealthChecks.UI.Client" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
+        <PackageReference Include="Carter"/>
     </ItemGroup>
 
 </Project>

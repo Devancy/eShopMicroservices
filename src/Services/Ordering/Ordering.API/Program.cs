@@ -6,9 +6,10 @@ using Ordering.Infrastructure.Data.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddOrderingApplication()
+builder.Services
+	.AddOrderingApplication()
 	.AddOrderingInfrastructure(builder.Configuration)
-	.AddOrderingApi();
+	.AddOrderingApi(builder.Configuration);
 
 var app = builder.Build();
 
