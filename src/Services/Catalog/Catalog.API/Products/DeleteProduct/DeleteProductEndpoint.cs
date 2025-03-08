@@ -8,9 +8,13 @@ public class DeleteProductEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapDelete("/products/{id}", async (Guid id, ISender sender) =>
+        app.MapDelete("/products/{id}", async (string id, ISender sender) =>
         {
-            var result = await sender.Send(new DeleteProductCommand(id));
+            if (!Guid.TryParse(id, out var guid))
+            {
+                throw new BadRequestException("Invalid product ID format. Please provide a valid GUID.");
+            }
+            var result = await sender.Send(new DeleteProductCommand(guid));
             if( result is { IsSuccess: true})
             {
                 return Results.NoContent();
