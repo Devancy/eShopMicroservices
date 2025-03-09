@@ -11,7 +11,8 @@ public class StoreBasketCommandValidator : AbstractValidator<StoreBasketCommand>
 	public StoreBasketCommandValidator()
 	{
 		RuleFor(x => x.Cart).NotNull().WithMessage("Please provide a valid cart");
-		RuleFor(x => x.Cart.UserName).NotNull().WithMessage("Please provide a valid username");
+		RuleFor(x => x.Cart.UserName).NotNull().WithMessage("Please provide a valid username")
+			.When(x => x.Cart != null!);
 	}
 }
 

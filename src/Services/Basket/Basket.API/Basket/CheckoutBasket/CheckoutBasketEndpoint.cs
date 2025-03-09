@@ -15,7 +15,7 @@ public class CheckoutBasketEndpoint : ICarterModule
 		{
 			var command = request.Adapt<CheckoutBasketCommand>();
 			var result = await sender.Send(command);
-			var response = request.Adapt<CheckoutBasketResponse>();
+			var response = result.Adapt<CheckoutBasketResponse>();
 			
 			return Results.Ok(response);
 		})
