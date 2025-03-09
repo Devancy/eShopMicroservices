@@ -6,7 +6,8 @@ services:
     image: postgres
   
   distributedcache:
-    image: redis
+#    image: redis
+    image: valkey/valkey
     
   orderdb:
     image: mcr.microsoft.com/mssql/server:2022-latest

@@ -28,7 +28,7 @@ builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 builder.Services.Decorate<IBasketRepository, CachedBasketRepository>();
 builder.Services.AddStackExchangeRedisCache(option =>
 {
-	option.Configuration = builder.Configuration.GetConnectionString("Redis");
+	option.Configuration = builder.Configuration.GetConnectionString("DistributedCache");
 });
 
 // GRPC services
@@ -50,7 +50,7 @@ builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 builder.Services.AddHealthChecks()
 	.AddNpgSql(builder.Configuration.GetConnectionString("Database")!)
-	.AddRedis(builder.Configuration.GetConnectionString("Redis")!);
+	.AddRedis(builder.Configuration.GetConnectionString("DistributedCache")!, name: "distributedCache", tags: ["basket", "valkey"]);
 
 var app = builder.Build();
 
