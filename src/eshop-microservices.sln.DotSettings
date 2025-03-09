@@ -4,4 +4,5 @@
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=discountdb/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=distributedcache/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=dtos/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=messagebroker/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=orderdb/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>
