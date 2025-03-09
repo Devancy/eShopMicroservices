@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services
-	.AddOrderingApplication()
+	.AddOrderingApplication(builder.Configuration)
 	.AddOrderingInfrastructure(builder.Configuration)
 	.AddOrderingApi(builder.Configuration);
 
