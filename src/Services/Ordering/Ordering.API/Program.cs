@@ -13,7 +13,6 @@ builder.Services
 
 var app = builder.Build();
 
-app.UseHttpsRedirection();
 app.UseOrderingApi();
 if (app.Environment.IsDevelopment())
 {
