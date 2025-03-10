@@ -65,7 +65,7 @@ public static class ServiceCollectionExtensions
 					});
 				});
 				// Add scoped filter for retry logging
-				configurator.UseConsumeFilter<ScopedLogRetryFilter>(context);
+				// configurator.UseConsumeFilter(typeof(ScopedLogRetryFilter<>), context);
 				
 				// Automatically configures receive endpoints (queues) for all registered consumers based on their types and the endpoint name formatter (kebab-case here).
 				// context: providing access to registered consumers and bind them to RabbitMQ queues
