@@ -2,6 +2,8 @@ using BuildingBlocks.Messaging.MassTransit;
 using Discount.Grpc;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Http.Resilience;
+using Polly;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,6 +47,25 @@ builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(
 		ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
 	};
 	return handler;
+})
+.AddResilienceHandler("grpc-pipeline", builder =>
+{
+	builder.AddRetry(new HttpRetryStrategyOptions
+	{
+		MaxRetryAttempts = 3,
+		Delay = TimeSpan.FromSeconds(1),
+		BackoffType = DelayBackoffType.Exponential
+	});
+
+	builder.AddCircuitBreaker(new HttpCircuitBreakerStrategyOptions
+	{
+		SamplingDuration = TimeSpan.FromSeconds(30),
+		FailureRatio = 0.5, // Break after 50% of requests fail
+		MinimumThroughput = 10, // Minimum number of requests to evaluate
+		BreakDuration = TimeSpan.FromSeconds(15) // Duration to keep the circuit open
+	});
+
+	builder.AddTimeout(TimeSpan.FromSeconds(5));
 });
 
 // Async communication services
