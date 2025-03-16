@@ -30,4 +30,8 @@
       <Protobuf Include="Protos\discount.proto" GrpcServices="Server" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Aspire\ServiceDefaults\ServiceDefaults.csproj" />
+    </ItemGroup>
+
 </Project>

@@ -8,6 +8,7 @@ using Polly;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.AddServiceDefaults();
 
 // App services
 var assembly = typeof(Program).Assembly;
@@ -78,6 +79,8 @@ builder.Services.AddHealthChecks()
 	.AddRedis(builder.Configuration.GetConnectionString("DistributedCache")!, name: "distributedCache", tags: ["basket", "valkey"]);
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 // Configure the HTTP request pipeline.
 app.MapGet("/", () => "Hello World!");

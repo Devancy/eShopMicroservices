@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
+
 // Add services to the container.
 builder.Services.AddGrpc();
 
@@ -13,6 +15,9 @@ builder.Services.AddDbContext<DiscountContext>(options =>
 });
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
+
 if (app.Environment.IsDevelopment())
 {
 	app.UseMigration();
