@@ -52,7 +52,7 @@ services:
       - "15672:15672"
         
   catalog.api:
-    container_name: catalog.api
+    container_name: catalog-api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
@@ -68,7 +68,7 @@ services:
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
 
   basket.api:
-    container_name: basket.api
+    container_name: basket-api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
@@ -76,9 +76,7 @@ services:
       - ConnectionStrings__Database=Server=basketdb;Port=5432;Database=BasketDb;User Id=postgres;Password=postgres;Include Error Detail=true
       - ConnectionStrings__DistributedCache=distributedcache:6379
       - Grpc__DiscountAddress=https://discount.grpc:8081
-      - MessageBroker__Host=amqp://ecommerce-mq:5672
-      - MessageBroker__UserName=guest
-      - MessageBroker__Password=guest
+      - ConnectionStrings__MessageBroker=amqp://guest:guest@ecommerce-mq:5672
       - MessageBroker__RetryCount=3
       - MessageBroker__RetryIntervalDeltaSeconds=2
     depends_on:
@@ -94,7 +92,7 @@ services:
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
         
   discount.grpc:
-    container_name: discount.grpc
+    container_name: discount-grpc
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
@@ -108,15 +106,13 @@ services:
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
         
   ordering.api:
-    container_name: ordering.api
+    container_name: ordering-api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
       - ConnectionStrings__Database=Server=orderdb;Database=OrderDb;User Id=sa;Password=GoGo@001;Encrypt=False;TrustServerCertificate=True
-      - MessageBroker__Host=amqp://ecommerce-mq:5672
-      - MessageBroker__UserName=guest
-      - MessageBroker__Password=guest
+      - ConnectionStrings__MessageBroker=amqp://guest:guest@ecommerce-mq:5672
       - MessageBroker__RetryCount=3
       - MessageBroker__RetryIntervalDeltaSeconds=2
       - FeatureManagement__OrderFulfillment=false

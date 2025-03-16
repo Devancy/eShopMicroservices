@@ -34,17 +34,11 @@ public static class ServiceCollectionExtensions
 			config.UsingRabbitMq((context, configurator) =>
 			{
 				var logger = context.GetRequiredService<ILogger<MassTransitRabbitMqConfiguration>>();
-				var host = configuration["MessageBroker:Host"] ??
+				var host =
+					configuration["ConnectionStrings:MessageBroker"] ??
 				           throw new InvalidOperationException("RabbitMQ host not configured.");
 				logger.LogInformation("Configuring RabbitMQ host: {Host}", host);
-				configurator.Host(new Uri(host), h =>
-				{
-					var username = configuration["MessageBroker:UserName"] ?? "guest";
-					var password = configuration["MessageBroker:Password"] ?? "guest";
-					h.Username(username);
-					h.Password(password);
-					logger.LogDebug("RabbitMQ credentials set - Username: {Username}", username);
-				});
+				configurator.Host(new Uri(host));
 				
 				// Add retry policy for transient failures (e.g., timeouts, connection issues)
 				configurator.UseMessageRetry(retry => 
