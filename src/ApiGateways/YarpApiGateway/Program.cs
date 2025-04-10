@@ -2,9 +2,13 @@ using Microsoft.AspNetCore.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to DI container
+builder.AddServiceDefaults();
+
+var config = builder.Configuration.GetSection("ReverseProxy");
 builder.Services.AddReverseProxy()
-	.LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
+	.LoadFromConfig(config)
+	.AddServiceDiscoveryDestinationResolver();
+
 builder.Services.AddRateLimiter(rateLimiterOptions =>
 {
 	rateLimiterOptions.AddFixedWindowLimiter("fixed", options =>

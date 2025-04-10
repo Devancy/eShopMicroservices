@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <Sdk Name="Aspire.AppHost.Sdk" Version="9.1.0"/>
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <IsAspireHost>true</IsAspireHost>
+        <UserSecretsId>da82ad74-95d3-41a5-95be-1d3e34267b3a</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Aspire.Hosting.AppHost"/>
+        <PackageReference Include="Aspire.Hosting.PostgreSQL" />
+        <PackageReference Include="Aspire.Hosting.RabbitMQ" />
+        <PackageReference Include="Aspire.Hosting.SqlServer" />
+        <PackageReference Include="Aspire.Hosting.Valkey" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\ApiGateways\YarpApiGateway\YarpApiGateway.csproj" />
+      <ProjectReference Include="..\..\Services\Basket\Basket.API\Basket.API.csproj" />
+      <ProjectReference Include="..\..\Services\Catalog\Catalog.API\Catalog.API.csproj" />
+      <ProjectReference Include="..\..\Services\Discount\Discount.Grpc\Discount.Grpc.csproj" />
+      <ProjectReference Include="..\..\Services\Ordering\Ordering.API\Ordering.API.csproj" />
+    </ItemGroup>
+
+</Project>

@@ -9,6 +9,7 @@ public class BasketCheckoutEventHandler(ISender sender, ILogger<BasketCheckoutEv
 {
 	public async Task Consume(ConsumeContext<BasketCheckoutEvent> context)
 	{
+		// throw new TimeoutException("Test timeout"); // Simulate transient failure
 		// TODO: Create new order and start order fulfillment process
 		logger.LogInformation("Integration Event handled: {IntegrationEvent}", context.Message.GetType().Name);
 

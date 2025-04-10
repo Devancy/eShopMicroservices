@@ -5,6 +5,8 @@ using Ordering.Infrastructure.Data.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
+
 // Add services to the container.
 builder.Services
 	.AddOrderingApplication(builder.Configuration)
@@ -12,6 +14,11 @@ builder.Services
 	.AddOrderingApi(builder.Configuration);
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
+
+// Configure the HTTP request pipeline.
+app.MapGet("/", () => "Hello World!");
 
 app.UseOrderingApi();
 if (app.Environment.IsDevelopment())
